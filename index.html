@@ -53,11 +53,11 @@
     placeholder="短信内容"
     :rules="[{ required: true, message: '请填写密码' }]"
   />
-  <div style="margin: 30px auto;text-align: center;color: green;"  ><a :href="hrr" ><van-button type="primary" @click="onSubmit">拉起短息发送</van-button></a></div>
+  <div style="margin: 30px auto;text-align: center;color: green;"  ><a :href="hrr" ><van-button type="primary" :url="hrr" @click="onSubmit">拉起短息发送</van-button></a></div>
   </van-form>
   `,
       methods: {
-        onSubmit(values) {
+        onSubmit() {
           var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
           let str = this.phones.split('\n').filter(item => {
             if (!myreg.test(item)) {
@@ -67,7 +67,7 @@
             }
           }).join(',');
           this.hrr = 'sms:' + str + '?body=' + this.content;
-          // console.log(str);
+          console.log(this.hrr);
           // console.log('submit', values);
         },
       },
