@@ -59,7 +59,7 @@
       methods: {
         onSubmit(values) {
           var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-          let str = this.phones.filter(item => {
+          let str = this.phones.split('\n').filter(item => {
             if (!myreg.test(item)) {
               return false;
             } else {
