@@ -36,11 +36,12 @@
     // 在 #app 标签下渲染一个按钮组件
     new Vue({
       el: '#app',
-      template: `<van-form @submit="onSubmit">
+      template: `<van-form >
   <van-field
     v-model="phones"
     type="textarea"
     name="phones"
+    rows="4"
     label="手机号列表"
     placeholder="手机号"
     :rules="[{ required: true, message: '请填写用户名' }]"
@@ -53,26 +54,47 @@
     placeholder="短信内容"
     :rules="[{ required: true, message: '请填写密码' }]"
   />
-  <div style="margin: 30px auto;text-align: center;color: green;"  ><a :href="hrr" ><van-button type="primary" :url="hrr" @click="onSubmit">拉起短息发送</van-button></a></div>
+  <div style="margin: 30px auto;text-align: center;color: green;"  >
+    
+    <van-button type="primary"  @click="onSubmit">拉起短息发送</van-button>
+    </div>
   </van-form>
   `,
       methods: {
         onSubmit() {
+          alert(111);
           var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-          let str = this.phones.split('\n').filter(item => {
-            if (!myreg.test(item)) {
-              return false;
-            } else {
-              return true;
-            }
-          }).join(',');
+          if (this.tmp.length === 0 && this.phones) {
+            this.tmp = this.phones.split('\n').filter(item => {
+              if (!myreg.test(item)) {
+                return false;
+              } else {
+                return true;
+              }
+            });
+          }
+
+          console.log(this.tmp);
+          let s_tmp = this.tmp.splice(0, 100);
+          let str = s_tmp.join(',');
+          this.phones = this.tmp.join('\n');
           this.hrr = 'sms:' + str + '?body=' + this.content;
-          console.log(this.hrr);
+
+          if (this.tmp.length === 0) {
+            this.phones = '';
+            this.content = '';
+            vant.Toast('您此列所有号码，已呼叫完毕！')
+            return ;
+          }
+          vant.Toast(`您的电话列表，还剩${Math.ceil(this.tmp.length/100)}趴`)
+
+          return ;
           // console.log('submit', values);
         },
       },
       data() {
         return {
+          tmp: [],
           phones: '',
           content: '',
           hrr: '',
