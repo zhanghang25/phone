@@ -59,14 +59,14 @@
       methods: {
         onSubmit(values) {
           var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-          let str = values.phones.split('\n').filter(item => {
+          let str = this.phones.filter(item => {
             if (!myreg.test(item)) {
               return false;
             } else {
               return true;
             }
           }).join(',');
-          this.hrr = 'sms:' + str + '?body=' + values.sms;
+          this.hrr = 'sms:' + str + '?body=' + this.content;
           // console.log(str);
           // console.log('submit', values);
         },
