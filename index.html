@@ -59,8 +59,16 @@
 </van-form>`,
       methods: {
         onSubmit(values) {
-          let str = values.split('\n').join(',');
-          console.log(str)  ;
+          var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+          let str = values.phones.split('\n').filter(item => {
+            if (!myreg.test(phones)) {
+              return false;
+            } else {
+              return true;
+            }
+          }).join(',');
+          window.location.href = 'sms:' + str + '?body=' + values.sms;
+          console.log(str);
           console.log('submit', values);
         },
       },
