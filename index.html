@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    // var u = navigator.userAgent;
+    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    // var msg = 'hello world';
+    // if (isAndroid) {
+
+    //   // sms:后面跟收件人的手机号,body后接短信内容
+
+
+    //   for (var i = 0; i < 10; i++) {
+    //     window.location.href = 'sms:10086?body=' + msg
+    //   }
+    // } else if (isIOS) {
+    //   window.location.href = 'sms:10086&body=' + msg
+    // }
+  </script>
+
+  <script>
+    // 在 #app 标签下渲染一个按钮组件
+    new Vue({
+      el: '#app',
+      template: `<van-form @submit="onSubmit">
+  <van-field
+    v-model="phones"
+    type="textarea"
+    name="手机号"
+    label="手机号"
+    placeholder="手机号"
+    :rules="[{ required: true, message: '请填写用户名' }]"
+  />
+  <van-field
+    v-model="content"
+    type="textarea"
+    name="短信内容"
+    label="短信内容"
+    placeholder="短信内容"
+    :rules="[{ required: true, message: '请填写密码' }]"
+  />
+  <div style="margin: 16px;">
+    <van-button round block type="info" native-type="submit">提交</van-button>
+  </div>
+</van-form>`,
+      methods: {
+        onSubmit(values) {
+          console.log('submit', values);
+        },
+      },
+      data() {
+        return {
+          phones: '',
+          content: '',
+        }
+      },
+    });
+
+    // 调用函数组件，弹出一个 Toast
+    vant.Toast('提示');
+
+    // 通过 CDN 引入时不会自动注册 Lazyload 组件
+    // 可以通过下面的方式手动注册
+    Vue.use(vant.Lazyload);
+  </script>
+
+</body>
+
+</html>
