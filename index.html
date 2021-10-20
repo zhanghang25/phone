@@ -53,8 +53,8 @@
     placeholder="短信内容"
     :rules="[{ required: true, message: '请填写密码' }]"
   />
+  <div style="margin: 30px auto;text-align: center;color: green;"  ><a :href="hrr" ><van-button type="primary" @click="onSubmit">拉起短息发送</van-button></a></div>
   </van-form>
-  <div style="margin: 30px auto; @click="onSubmit"><a :href="hrr" >拉起短息发送</a></div>
   `,
       methods: {
         onSubmit(values) {
@@ -81,7 +81,7 @@
     });
 
     // 调用函数组件，弹出一个 Toast
-    vant.Toast('提示');
+    // vant.Toast('提示');
 
     // 通过 CDN 引入时不会自动注册 Lazyload 组件
     // 可以通过下面的方式手动注册
